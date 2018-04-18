@@ -16,19 +16,23 @@ const renderBeers = () => {
     }
 };
 
-const sortBeers = () => {
+var acends = true;
 
-   for (let i=0; i<beers.length-1; i++){
-    /*   for (let j=0; j<beers.length; j++){
-           if (beers[i].rating < beers[j].rating){ */
-            if (beers[i].rating < beers[i+1].rating){
-            $("ul").append('<li>'+beers[i].name+' '+beers[i].category+' rating is '+beers[i].rating+'</li>')
-            $("ul").append('<li>'+beers[i+1].name+' '+beers[i+1].category+' rating is '+beers[i+1].rating+'</li>')
-           } else {
-            $("ul").append('<li>'+beers[i+1].name+' '+beers[i+1].category+' rating is '+beers[i+1].rating+'</li>')
-            $("ul").append('<li>'+beers[i].name+' '+beers[i].category+' rating is '+beers[i].rating+'</li>')
-           }
-       }
+var sortBeers =function(){
+    for (let i=0; i<beers.length; i++){
+        if (acends===false) {
+    beers.sort(function(a, b){
+         return a.rating - b.rating ||  a.name.localeCompare(b.name)
+        })
+        $("ul").append('<li>'+beers[i].name+' '+beers[i].category+' rating is '+beers[i].rating+'</li>')
+    } else {
+        beers.sort(function(a, b){
+            return b.rating - a.rating ||  b.name.localeCompare(a.name)
+           })
+           $("ul").append('<li>'+beers[i].name+' '+beers[i].category+' rating is '+beers[i].rating+'</li>')
+    }
+}
+
 }
 
 
@@ -41,7 +45,7 @@ $(".post-beer").click(function(){
 })
 
 $(".sort").click(function(){
+    acends = !acends
     $("ul").find('li').remove();    
     sortBeers();
 })
-

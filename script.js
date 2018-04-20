@@ -16,18 +16,18 @@ const renderBeers = () => {
     }
 };
 
-var acends = true;
+var order = true;
 
 var sortBeers =function(){
     for (let i=0; i<beers.length; i++){
-        if (acends===false) {
+        if (order===false) {
     beers.sort(function(a, b){
-         return a.rating - b.rating ||  a.name.localeCompare(b.name)
+         return a.rating - b.rating 
         })
         $("ul").append('<li>'+beers[i].name+' '+beers[i].category+' rating is '+beers[i].rating+'</li>')
     } else {
         beers.sort(function(a, b){
-            return b.rating - a.rating ||  b.name.localeCompare(a.name)
+            return b.rating - a.rating 
            })
            $("ul").append('<li>'+beers[i].name+' '+beers[i].category+' rating is '+beers[i].rating+'</li>')
     }
@@ -45,7 +45,7 @@ $(".post-beer").click(function(){
 })
 
 $(".sort").click(function(){
-    acends = !acends
+    order = !order
     $("ul").find('li').remove();    
     sortBeers();
 })
